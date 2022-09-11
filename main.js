@@ -1,5 +1,12 @@
 
-const myLibrary = {};
+let myLibrary = {};
+
+if (localStorage.getItem('library') === null) {
+    localStorage.setItem('library', JSON.stringify(myLibrary));
+} else {
+    myLibrary = JSON.parse(localStorage.getItem('library'));
+}
+
 
 // Debug code
 
@@ -64,8 +71,10 @@ function addBook() { // Add new book to object
         isRead: bookIsRead
     };
 
-    console.log(myLibrary);
+    localStorage.removeItem('library');
+    localStorage.setItem('library', JSON.stringify(myLibrary));
 
+    
 
     books();
 }
