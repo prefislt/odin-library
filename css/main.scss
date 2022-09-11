@@ -27,12 +27,26 @@ body {
 
     main {
 
+
+
         .addToLibrary {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            height: 200px;
             padding: 20px;
+            transition: 1s ease-in-out;
+            
+            ul {
+                overflow: hidden;
+            }
+        }
+
+        .hide {
+            height: 0;
+            padding: 0;
+            opacity: 0;
         }
 
         .library {

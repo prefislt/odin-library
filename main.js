@@ -70,4 +70,16 @@ function addBook() { // Add new book to object
     books();
 }
 
+let addBtn = false;
+
+document.querySelector(".addBook").addEventListener("click", () => {
+    addBtn =! addBtn;
+
+    if (addBtn) {
+        document.querySelector(".addToLibrary").classList.remove("hide");
+    } else {
+        document.querySelector(".addToLibrary").classList.add("hide");
+    }
+});
+
 books();

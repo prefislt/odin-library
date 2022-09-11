@@ -27,7 +27,17 @@ body main .addToLibrary {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 200px;
   padding: 20px;
+  transition: 1s ease-in-out;
+}
+body main .addToLibrary ul {
+  overflow: hidden;
+}
+body main .hide {
+  height: 0;
+  padding: 0;
+  opacity: 0;
 }
 body main .library {
   display: flex;
