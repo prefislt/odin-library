@@ -7,24 +7,24 @@ if (localStorage.getItem('library') === null) {
     myLibrary = JSON.parse(localStorage.getItem('library'));
 }
 
-
-// Debug code
-
-myLibrary[0] = {
-    title: "Žiedų valdovas",
-    author: "Vardenis Pavardenis",
-    pages: "358",
-    isRead: true
-};
-
-myLibrary[1] = {
-    title: "Nevaldomasas",
-    author: "Juris Jurgalavicius",
-    pages: "301",
-    isRead: false
-};
-
 function books() { // Show all books on a page
+    myLibrary = JSON.parse(localStorage.getItem('library'));
+    // Debug code
+
+    myLibrary[0] = {
+        title: "Žiedų valdovas",
+        author: "Vardenis Pavardenis",
+        pages: "358",
+        isRead: true
+    };
+
+    myLibrary[1] = {
+        title: "Nevaldomasas",
+        author: "Juris Jurgalavicius",
+        pages: "301",
+        isRead: false
+    };
+
     document.querySelector("#library").innerHTML = "";
 
     let librarySize = Object.keys(myLibrary).length;
@@ -74,14 +74,17 @@ function addBook() { // Add new book to object
     localStorage.removeItem('library');
     localStorage.setItem('library', JSON.stringify(myLibrary));
 
-    
+    books();
+}
 
+function clearStorage() {
+    myLibrary = {};
+    myLibrary = localStorage.setItem('library', JSON.stringify(myLibrary));
     books();
 }
 
 let addBtn = false;
-
-document.querySelector(".addBook").addEventListener("click", () => {
+document.querySelector("#addBook").addEventListener("click", () => {
     addBtn =! addBtn;
 
     if (addBtn) {
