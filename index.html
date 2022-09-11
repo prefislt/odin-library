@@ -6,8 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library App</title>
     <link rel="stylesheet" href="./css/main.css">
+    <script src="main.js" defer></script>
 </head>
 <body>
-    
+    <nav>
+        <div class="logo">My library</div>
+        <div class="addBook">
+            <button id="addBook">Add book</button>
+        </div>
+    </nav>
+    <main>
+        <div class="addToLibrary">
+            <p>Add book to library:</p>
+            <ul>
+                <li>Title: <input type="text" id="bookTitle"></li>
+                <li>Author: <input type="text" id="bookAuthor"></li>
+                <li>Pages: <input type="text" id="bookPages"></li>
+                <li>You read it? <input type="checkbox" id="bookIsRead"></li>
+            </ul>
+            <p><button id="submitBook" onclick="addBook()">Submit book</button></p>
+            <p id="successMsg"></p>
+        </div>
+        <div class="library" id="library">
+            <!-- <div class="book">
+                <p class="title">A Game of Thrones</p>
+                <p class="author">George R. R. Martin</p>
+                <p class="pages">694</p>
+                <p class="isRead">True</p>
+            </div> -->
+        </div>
+    </main>
 </body>
 </html>

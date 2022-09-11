@@ -2,8 +2,53 @@
 * {
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
 body {
   font-family: "Poppins", sans-serif;
+}
+body nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px 0 40px;
+  height: 70px;
+  width: 100%;
+  background-color: antiquewhite;
+  box-sizing: border-box;
+}
+body nav .logo {
+  font-weight: 800;
+  font-size: 1.5em;
+}
+body main .addToLibrary {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+body main .library {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  background-color: rgb(240, 240, 240);
+  gap: 10px;
+}
+body main .library .book {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  gap: 2px;
+  height: 400px;
+  width: 250px;
+  border: 1px solid;
+}
+body main .library .book .title {
+  font-weight: 600;
 }/*# sourceMappingURL=main.css.map */
