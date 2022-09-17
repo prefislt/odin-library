@@ -50,14 +50,25 @@ body main .library {
 }
 body main .library .book {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
   flex-direction: column;
-  text-align: center;
   gap: 2px;
   height: 400px;
   width: 250px;
   border: 1px solid;
+}
+body main .library .book .info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  flex-grow: 1;
+}
+body main .library .book .deleteBtn {
+  width: 100%;
+  font-weight: 800;
+  color: red;
 }
 body main .library .book .title {
   font-weight: 600;

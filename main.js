@@ -1,5 +1,5 @@
 
-let myLibrary = {};
+let myLibrary = [];
 
 if (localStorage.getItem('library') === null) {
     localStorage.setItem('library', JSON.stringify(myLibrary));
@@ -7,43 +7,55 @@ if (localStorage.getItem('library') === null) {
     myLibrary = JSON.parse(localStorage.getItem('library'));
 }
 
+console.log(myLibrary);
+
 function books() { // Show all books on a page
     myLibrary = JSON.parse(localStorage.getItem('library'));
+
+    console.log(myLibrary);
     // Debug code
 
-    myLibrary[0] = {
-        title: "Žiedų valdovas",
-        author: "Vardenis Pavardenis",
-        pages: "358",
-        isRead: true
-    };
+    // myLibrary[0] = {
+    //     id: 0,
+    //     title: "Žiedų valdovas",
+    //     author: "Vardenis Pavardenis",
+    //     pages: "358",
+    //     isRead: true
+    // };
 
-    myLibrary[1] = {
-        title: "Nevaldomasas",
-        author: "Juris Jurgalavicius",
-        pages: "301",
-        isRead: false
-    };
+    // myLibrary[1] = {
+    //     id: 1,
+    //     title: "Nevaldomasas",
+    //     author: "Juris Jurgalavicius",
+    //     pages: "301",
+    //     isRead: false
+    // };
 
     document.querySelector("#library").innerHTML = "";
 
     let librarySize = Object.keys(myLibrary).length;
+    console.log(myLibrary.length);
+    if (myLibrary.length > 0) {
+        for (let i = 0; i < librarySize; i++) {
+            
+            let isReadIcon;
 
-    for (let i = 0; i < librarySize; i++) {
-        let bookArray = Object.values(myLibrary[i]);
-
-        if (bookArray[3] == true) {
-            bookArray[3] = "✅";
-        } else { bookArray[3] = "❌"; }
-
-        document.querySelector("#library").innerHTML += `
-        <div class="book">
-        <p class="title">${bookArray[0]}</p>
-        <p class="author">${bookArray[1]}</p>
-        <p class="pages">${bookArray[2]}</p>
-        <p class="isRead">${bookArray[3]}</p>
-        </div>
-        `;
+            if (myLibrary[i].isRead == true) {
+                isReadIcon = "✅";
+            } else { isReadIcon = "❌"; }
+    
+            document.querySelector("#library").innerHTML += `
+            <div class="book">
+                <div class="info">
+                    <p class="title">${myLibrary[i].title}</p>
+                    <p class="author">${myLibrary[i].author}</p>
+                    <p class="pages">${myLibrary[i].pages}</p>
+                    <p class="isRead">${isReadIcon}</p>
+                </div>
+                <button class="deleteBtn" onclick=removeBook(${i})>X</button>
+            </div>
+            `;
+        }
     }
 }
 
@@ -64,12 +76,17 @@ function addBook() { // Add new book to object
         size = librarySize++;
     }
 
-    myLibrary[size] = {
+    myLibrary.push({
+        id: size,
         title: bookTitle,
         author: bookAuthor,
         pages: bookPages,
         isRead: bookIsRead
-    };
+    });
+
+    console.log("ID: " + size);
+    console.log("Title: " + bookTitle);
+    console.log("Is read: " + bookIsRead);
 
     localStorage.removeItem('library');
     localStorage.setItem('library', JSON.stringify(myLibrary));
@@ -78,8 +95,15 @@ function addBook() { // Add new book to object
 }
 
 function clearStorage() {
-    myLibrary = {};
+    myLibrary = [];
     myLibrary = localStorage.setItem('library', JSON.stringify(myLibrary));
+    books();
+}
+
+function removeBook(id) {
+    console.log(id);
+    myLibrary.splice(id, 1);
+    localStorage.setItem('library', JSON.stringify(myLibrary));
     books();
 }
 

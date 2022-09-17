@@ -60,14 +60,27 @@ body {
 
             .book {
                 display: flex;
-                justify-content: center;
-                align-items: center;
+                justify-content: space-between;
                 flex-direction: column;
-                text-align: center;
                 gap: 2px;
                 height: 400px;
                 width: 250px;
                 border: 1px solid;
+
+                .info {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    text-align: center;
+                    flex-grow: 1;
+                }
+
+                .deleteBtn {
+                    width: 100%;
+                    font-weight: 800;
+                    color: red;
+                }
     
                 .title {
                     font-weight: 600;
