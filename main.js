@@ -12,25 +12,6 @@ console.log(myLibrary);
 function books() { // Show all books on a page
     myLibrary = JSON.parse(localStorage.getItem('library'));
 
-    console.log(myLibrary);
-    // Debug code
-
-    // myLibrary[0] = {
-    //     id: 0,
-    //     title: "Žiedų valdovas",
-    //     author: "Vardenis Pavardenis",
-    //     pages: "358",
-    //     isRead: true
-    // };
-
-    // myLibrary[1] = {
-    //     id: 1,
-    //     title: "Nevaldomasas",
-    //     author: "Juris Jurgalavicius",
-    //     pages: "301",
-    //     isRead: false
-    // };
-
     document.querySelector("#library").innerHTML = "";
 
     let librarySize = Object.keys(myLibrary).length;
@@ -121,15 +102,18 @@ function readStatusChange(id) {
     localStorage.setItem('library', JSON.stringify(myLibrary));
 }
 
-let addBtn = false;
 document.querySelector("#addBook").addEventListener("click", () => {
-    addBtn =! addBtn;
-
-    if (addBtn) {
-        document.querySelector(".addToLibrary").classList.remove("hide");
-    } else {
-        document.querySelector(".addToLibrary").classList.add("hide");
-    }
+        document.querySelector(".popup").classList.remove("hide");
 });
 
+document.querySelector("#closePopup").addEventListener("click", () => {
+
+        document.querySelector(".popup").classList.add("hide");
+});
+
+document.addEventListener("keydown", () => {
+    if (event.key === 'Escape') {
+        document.querySelector(".popup").classList.add("hide");
+    }
+});
 books();

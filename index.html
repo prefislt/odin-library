@@ -9,6 +9,22 @@
     <script src="main.js" defer></script>
 </head>
 <body>
+    <div class="popup hide">
+        <div class="popupInside">
+            <button id="closePopup">X</button>
+            <div class="addToLibrary">
+                <p>Add book to library:</p>
+                <ul>
+                    <li><span>Title</span><input type="text" id="bookTitle"></li>
+                    <li><span>Author</span><input type="text" id="bookAuthor"></li>
+                    <li><span>Pages</span><input type="text" id="bookPages"></li>
+                    <li><span>You read it?</span><input type="checkbox" id="bookIsRead"></li>
+                </ul>
+                <p><button id="submitBook" onclick="addBook()">Submit book</button></p>
+                <p id="successMsg"></p>
+            </div>
+        </div>
+    </div>
     <nav>
         <div class="logo">My library</div>
         <div class="addBook">
@@ -17,17 +33,6 @@
         </div>
     </nav>
     <main>
-        <div class="addToLibrary hide">
-            <p>Add book to library:</p>
-            <ul>
-                <li>Title: <input type="text" id="bookTitle"></li>
-                <li>Author: <input type="text" id="bookAuthor"></li>
-                <li>Pages: <input type="text" id="bookPages"></li>
-                <li>You read it? <input type="checkbox" id="bookIsRead"></li>
-            </ul>
-            <p><button id="submitBook" onclick="addBook()">Submit book</button></p>
-            <p id="successMsg"></p>
-        </div>
         <div class="library" id="library">
             <!-- <div class="book">
                 <p class="title">A Game of Thrones</p>
