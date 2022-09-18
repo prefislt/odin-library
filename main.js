@@ -50,7 +50,7 @@ function books() { // Show all books on a page
                     <p class="title">${myLibrary[i].title}</p>
                     <p class="author">${myLibrary[i].author}</p>
                     <p class="pages">${myLibrary[i].pages}</p>
-                    <p class="isRead">${isReadIcon}</p>
+                    <button class="isRead" data-readStatusId="${i}" onclick=readStatusChange(${i})>${isReadIcon}</button>
                 </div>
                 <button class="deleteBtn" onclick=removeBook(${i})>X</button>
             </div>
@@ -105,6 +105,20 @@ function removeBook(id) {
     myLibrary.splice(id, 1);
     localStorage.setItem('library', JSON.stringify(myLibrary));
     books();
+}
+
+function readStatusChange(id) {
+
+    let bookStatus = document.querySelector(`[data-readStatusId='${id}']`);
+
+    if (myLibrary[id].isRead) {
+        myLibrary[id].isRead = false;
+        bookStatus.innerHTML = "❌";
+    } else { 
+        myLibrary[id].isRead = true;
+        bookStatus.innerHTML = "✅";
+    }
+    localStorage.setItem('library', JSON.stringify(myLibrary));
 }
 
 let addBtn = false;
