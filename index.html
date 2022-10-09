@@ -11,14 +11,16 @@
 <body>
     <div class="popup hide">
         <div class="popupInside">
-            <button id="closePopup">X</button>
+            <div class="top">
+                <span>Add book to library</span>
+                <button id="closePopup">X</button>
+            </div>
             <div class="addToLibrary">
-                <p>Add book to library:</p>
                 <ul>
-                    <li><span>Title</span><input type="text" id="bookTitle"></li>
-                    <li><span>Author</span><input type="text" id="bookAuthor"></li>
-                    <li><span>Pages</span><input type="text" id="bookPages"></li>
-                    <li><span>You read it?</span><input type="checkbox" id="bookIsRead"></li>
+                    <li><span>Title</span><input type="text" id="bookTitle"/></li>
+                    <li><span>Author</span><input type="text" id="bookAuthor"/></li>
+                    <li><span>Pages</span><input type="text" id="bookPages"/></li>
+                    <li><span>You read it?</span><input type="checkbox" id="bookIsRead"/></li>
                 </ul>
                 <p><button id="submitBook" onclick="addBook()">Submit book</button></p>
                 <p id="successMsg"></p>
@@ -27,9 +29,9 @@
     </div>
     <nav>
         <div class="logo">My library</div>
-        <div class="addBook">
-            <button id="addBook">Add book</button>
-            <button id="clearStorage" onclick="clearStorage()">Clear local storage</button>
+        <div class="navOptions">
+            <button class="btnStyle" id="addBook">Add book</button>
+            <button class="btnStyle" id="clearStorage" onclick="clearStorage()">Clear local storage</button>
         </div>
     </nav>
     <main>

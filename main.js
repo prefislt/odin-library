@@ -22,21 +22,28 @@ function books() { // Show all books on a page
             let isReadIcon;
 
             if (myLibrary[i].isRead == true) {
-                isReadIcon = "✅";
-            } else { isReadIcon = "❌"; }
+                isReadIcon = "READ";
+            } else { isReadIcon = "NOT READ"; }
     
             document.querySelector("#library").innerHTML += `
             <div class="book">
                 <div class="info">
-                    <p class="title">${myLibrary[i].title}</p>
-                    <p class="author">${myLibrary[i].author}</p>
-                    <p class="pages">${myLibrary[i].pages}</p>
+                    <p class="title">📖 ${myLibrary[i].title}</p>
+                    <p class="author">👤 ${myLibrary[i].author}</p>
+                    <p class="pages">📄 ${myLibrary[i].pages} pages</p>
+                    
+                </div>
+                <div class="options">
+                    <button class="deleteBtn" onclick=removeBook(${i})>X</button>
                     <button class="isRead" data-readStatusId="${i}" onclick=readStatusChange(${i})>${isReadIcon}</button>
                 </div>
-                <button class="deleteBtn" onclick=removeBook(${i})>X</button>
             </div>
             `;
         }
+    } else {
+        document.querySelector("#library").innerHTML += `
+                Empty :(
+            `;
     }
 }
 
@@ -76,15 +83,18 @@ function addBook() { // Add new book to object
 }
 
 function clearStorage() {
+    if (confirm("Ar you sure you want to clear local storage? This action will remove all your books!")) {
     myLibrary = [];
     myLibrary = localStorage.setItem('library', JSON.stringify(myLibrary));
+    }
     books();
 }
 
 function removeBook(id) {
-    console.log(id);
-    myLibrary.splice(id, 1);
-    localStorage.setItem('library', JSON.stringify(myLibrary));
+    if (confirm("Ar you sure you want to remove this book?")) {
+        myLibrary.splice(id, 1);
+        localStorage.setItem('library', JSON.stringify(myLibrary));
+    }
     books();
 }
 
@@ -94,10 +104,10 @@ function readStatusChange(id) {
 
     if (myLibrary[id].isRead) {
         myLibrary[id].isRead = false;
-        bookStatus.innerHTML = "❌";
+        bookStatus.innerHTML = "NOT READ";
     } else { 
         myLibrary[id].isRead = true;
-        bookStatus.innerHTML = "✅";
+        bookStatus.innerHTML = "READ";
     }
     localStorage.setItem('library', JSON.stringify(myLibrary));
 }
@@ -116,4 +126,5 @@ document.addEventListener("keydown", () => {
         document.querySelector(".popup").classList.add("hide");
     }
 });
+
 books();
