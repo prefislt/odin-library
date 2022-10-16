@@ -122,6 +122,9 @@ body .popup .popupInside .addToLibrary {
 body .popup .popupInside .addToLibrary #successMsg {
   font-size: small;
 }
+body .popup .popupInside .addToLibrary #submitBook {
+  color: black;
+}
 body .popup .popupInside .addToLibrary p {
   padding: 10px;
 }
