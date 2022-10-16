@@ -57,6 +57,9 @@ function addBook() { // Add new book to object
     if (bookTitle == "" || bookAuthor === ""|| bookPages === "") {
         document.querySelector("#successMsg").innerHTML = "<b>Error!</b> Missing information!";
         return;
+    } else if (isNaN(bookPages) || bookPages < 1) {
+        document.querySelector("#successMsg").innerHTML = "<b>Error!</b> Invalid number of pages!";
+        return;
     } else {
         document.querySelector("#successMsg").innerHTML = "<b>Success!</b> Book added!";
     }
