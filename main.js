@@ -13,7 +13,6 @@ function books() { // Show all books on a page
     document.querySelector("#library").innerHTML = "";
 
     let librarySize = Object.keys(myLibrary).length;
-    console.log(myLibrary.length);
     if (myLibrary.length > 0) {
         for (let i = 0; i < librarySize; i++) {
             
@@ -51,8 +50,6 @@ function addBook() { // Add new book to object
     let bookAuthor = document.querySelector("#bookAuthor").value;
     let bookPages = document.querySelector("#bookPages").value;
     let bookIsRead = document.querySelector("#bookIsRead").checked;
-
-    console.log(bookTitle);
 
     if (bookTitle == "" || bookAuthor === ""|| bookPages === "") {
         document.querySelector("#successMsg").innerHTML = "<b>Error!</b> Missing information!";
