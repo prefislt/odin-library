@@ -31,6 +31,7 @@ body {
 
             button {
                 border: 0;
+                color: black;
                 cursor: pointer;
                 height: 40px;
                 padding: 10px;
@@ -80,8 +81,14 @@ body {
         height: 100%;
         width: 100%;
         transition: 0.5s ease-in-out;
+        transform: scale(0);
+        opacity: 0;
 
         .popupInside {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 300px;
             background-color: rgb(255, 150, 69);
             border-radius: 10px;
             color: black;
@@ -106,6 +113,7 @@ body {
                 border: none;
                 background-color: rgba(0, 0, 0, 0.0);
                 font-weight: 600;
+                color: black;
                 font-size: large;
                 cursor: pointer;
                 transition: 0.2s ease-in-out;
@@ -124,8 +132,11 @@ body {
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                padding: 0 20px 0 20px;
                 gap: 10px;
+
+                #successMsg {
+                    font-size: small;
+                }
 
                 p {
                     padding: 10px;
@@ -189,9 +200,9 @@ body {
         }
     }
 
-    .hide {
-        transform: scale(0);
-        opacity: 0;
+    .unhide {
+        transform: scale(1);
+        opacity: 1;
     }
 
     main {

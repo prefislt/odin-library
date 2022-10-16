@@ -116,18 +116,18 @@ function readStatusChange(id) {
 }
 
 document.querySelector("#addBook").addEventListener("click", () => {
-        document.querySelector(".popup").classList.remove("hide");
+        document.querySelector(".popup").classList.add("unhide");
         document.querySelector("#successMsg").innerHTML = "";
 });
 
 document.querySelector("#closePopup").addEventListener("click", () => {
 
-        document.querySelector(".popup").classList.add("hide");
+        document.querySelector(".popup").classList.remove("unhide");
 });
 
 document.addEventListener("keydown", () => {
     if (event.key === 'Escape') {
-        document.querySelector(".popup").classList.add("hide");
+        document.querySelector(".popup").classList.remove("unhide");
     }
 });
 

@@ -30,6 +30,7 @@ body nav .navOptions {
 }
 body nav .navOptions button {
   border: 0;
+  color: black;
   cursor: pointer;
   height: 40px;
   padding: 10px;
@@ -70,8 +71,14 @@ body .popup {
   height: 100%;
   width: 100%;
   transition: 0.5s ease-in-out;
+  transform: scale(0);
+  opacity: 0;
 }
 body .popup .popupInside {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 300px;
   background-color: rgb(255, 150, 69);
   border-radius: 10px;
   color: black;
@@ -94,6 +101,7 @@ body .popup .popupInside #closePopup {
   border: none;
   background-color: rgba(0, 0, 0, 0);
   font-weight: 600;
+  color: black;
   font-size: large;
   cursor: pointer;
   transition: 0.2s ease-in-out;
@@ -109,8 +117,10 @@ body .popup .popupInside .addToLibrary {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0 20px 0 20px;
   gap: 10px;
+}
+body .popup .popupInside .addToLibrary #successMsg {
+  font-size: small;
 }
 body .popup .popupInside .addToLibrary p {
   padding: 10px;
@@ -161,9 +171,9 @@ body .popup .popupInside .addToLibrary ul li span {
   font-weight: 600;
   font-size: small;
 }
-body .hide {
-  transform: scale(0);
-  opacity: 0;
+body .unhide {
+  transform: scale(1);
+  opacity: 1;
 }
 body main .library {
   display: flex;
