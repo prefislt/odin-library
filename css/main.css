@@ -21,27 +21,42 @@ body nav {
 }
 body nav .navOptions {
   display: flex;
-  padding: 0 20px 0 20px;
   justify-content: right;
   flex-direction: row;
   gap: 10px;
   align-items: center;
-  height: 100%;
+  height: 70px;
+  padding: 0 5px 0 5px;
 }
-body nav .navOptions .btnStyle {
+body nav .navOptions button {
   border: 0;
   cursor: pointer;
+  height: 40px;
   padding: 10px;
   border-radius: 5px;
   font-weight: 600;
   background-color: rgb(255, 150, 69);
   transition: 0.2s ease-in-out;
 }
-body nav .navOptions .btnStyle:hover {
+body nav .navOptions button:hover {
   transform: scale(1.05);
 }
-body nav .navOptions .btnStyle:active {
+body nav .navOptions button:active {
   transform: scale(1);
+}
+body nav .navOptions button:nth-child(1) {
+  padding: 0px;
+}
+body nav .navOptions button svg {
+  display: flex;
+  align-items: center;
+  height: 15px;
+  width: 15px;
+  padding: 10px;
+  transition: 0.2s ease-in-out;
+}
+body nav .navOptions button svg:hover {
+  transform: rotate(90deg);
 }
 body nav .logo {
   font-weight: 800;

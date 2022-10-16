@@ -23,15 +23,17 @@
                     <li><span>You read it?</span><input type="checkbox" id="bookIsRead"/></li>
                 </ul>
                 <p><button id="submitBook" onclick="addBook()">Submit book</button></p>
-                <p id="successMsg"></p>
+                <p id="successMsg"></p></br>
             </div>
         </div>
     </div>
     <nav>
         <div class="logo">My library</div>
         <div class="navOptions">
-            <button class="btnStyle" id="addBook">Add book</button>
-            <button class="btnStyle" id="clearStorage" onclick="clearStorage()">Clear local storage</button>
+            <button id="addBook">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z"/></svg>
+            </button>
+            <button id="clearStorage" onclick="clearStorage()">Remove all</button>
         </div>
     </nav>
     <main>

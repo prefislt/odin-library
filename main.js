@@ -7,8 +7,6 @@ if (localStorage.getItem('library') === null) {
     myLibrary = JSON.parse(localStorage.getItem('library'));
 }
 
-console.log(myLibrary);
-
 function books() { // Show all books on a page
     myLibrary = JSON.parse(localStorage.getItem('library'));
 
@@ -41,7 +39,7 @@ function books() { // Show all books on a page
             `;
         }
     } else {
-        document.querySelector("#library").innerHTML += `
+        document.querySelector("#library").innerHTML = `
                 Empty :(
             `;
     }
@@ -53,6 +51,15 @@ function addBook() { // Add new book to object
     let bookAuthor = document.querySelector("#bookAuthor").value;
     let bookPages = document.querySelector("#bookPages").value;
     let bookIsRead = document.querySelector("#bookIsRead").checked;
+
+    console.log(bookTitle);
+
+    if (bookTitle == "" || bookAuthor === ""|| bookPages === "") {
+        document.querySelector("#successMsg").innerHTML = "<b>Error!</b> Missing information!";
+        return;
+    } else {
+        document.querySelector("#successMsg").innerHTML = "<b>Success!</b> Book added!";
+    }
 
     let librarySize = Object.keys(myLibrary).length;
 
@@ -71,10 +78,6 @@ function addBook() { // Add new book to object
         pages: bookPages,
         isRead: bookIsRead
     });
-
-    console.log("ID: " + size);
-    console.log("Title: " + bookTitle);
-    console.log("Is read: " + bookIsRead);
 
     localStorage.removeItem('library');
     localStorage.setItem('library', JSON.stringify(myLibrary));
@@ -114,6 +117,7 @@ function readStatusChange(id) {
 
 document.querySelector("#addBook").addEventListener("click", () => {
         document.querySelector(".popup").classList.remove("hide");
+        document.querySelector("#successMsg").innerHTML = "";
 });
 
 document.querySelector("#closePopup").addEventListener("click", () => {
