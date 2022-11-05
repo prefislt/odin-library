@@ -7,7 +7,17 @@ if (localStorage.getItem('library') === null) {
     myLibrary = JSON.parse(localStorage.getItem('library'));
 }
 
-function books() { // Show all books on a page
+class Book {
+    constructor(title, author, year, pages, isRead) {
+        this.title = title;
+        this.author = author;
+        this.year = year;
+        this.pages = pages;
+        this.isRead = isRead;
+    }
+}
+
+function renderBooks() { // Render all books on a page
     myLibrary = JSON.parse(localStorage.getItem('library'));
 
     document.querySelector("#library").innerHTML = "";
@@ -25,10 +35,10 @@ function books() { // Show all books on a page
             document.querySelector("#library").innerHTML += `
             <div class="book">
                 <div class="info">
-                    <p class="title">📖 ${myLibrary[i].title}</p>
-                    <p class="author">👤 ${myLibrary[i].author}</p>
-                    <p class="pages">📄 ${myLibrary[i].pages} pages</p>
-                    
+                    <p>📖 ${myLibrary[i].title}</p>
+                    <p>👤 ${myLibrary[i].author}</p>
+                    <p>📅 ${myLibrary[i].year}<p>
+                    <p>📄 ${myLibrary[i].pages} pages</p>
                 </div>
                 <div class="options">
                     <button class="deleteBtn" onclick=removeBook(${i})>X</button>
@@ -48,41 +58,31 @@ function addBook() { // Add new book to object
 
     let bookTitle = document.querySelector("#bookTitle").value;
     let bookAuthor = document.querySelector("#bookAuthor").value;
+    let bookYear = document.querySelector("#bookYear").value;
     let bookPages = document.querySelector("#bookPages").value;
     let bookIsRead = document.querySelector("#bookIsRead").checked;
 
-    if (bookTitle == "" || bookAuthor === ""|| bookPages === "") {
+    if (bookTitle === "" || bookAuthor === "" || bookPages === "" || bookYear === "") {
         document.querySelector("#successMsg").innerHTML = "<b>Error!</b> Missing information!";
         return;
-    } else if (isNaN(bookPages) || bookPages < 1) {
+    }
+    if (isNaN(bookPages) || bookPages < 1) {
         document.querySelector("#successMsg").innerHTML = "<b>Error!</b> Invalid number of pages!";
         return;
-    } else {
-        document.querySelector("#successMsg").innerHTML = "<b>Success!</b> Book added!";
+    }
+    if (isNaN(bookYear)) {
+        document.querySelector("#successMsg").innerHTML = "<b>Error!</b> Year number is invalid!";
+        return;
     }
 
-    let librarySize = Object.keys(myLibrary).length;
-
-    let size;
-
-    if (librarySize == 0) {
-        size = librarySize;
-    } else {
-        size = librarySize++;
-    }
-
-    myLibrary.push({
-        id: size,
-        title: bookTitle,
-        author: bookAuthor,
-        pages: bookPages,
-        isRead: bookIsRead
-    });
+    myLibrary.push(new Book(bookTitle, bookAuthor, bookYear, bookPages, bookIsRead));
 
     localStorage.removeItem('library');
     localStorage.setItem('library', JSON.stringify(myLibrary));
 
-    books();
+    document.querySelector("#successMsg").innerHTML = "<b>Success!</b> Book added to the library!";
+
+    renderBooks();
 }
 
 function clearStorage() {
@@ -90,7 +90,7 @@ function clearStorage() {
     myLibrary = [];
     myLibrary = localStorage.setItem('library', JSON.stringify(myLibrary));
     }
-    books();
+    renderBbooks();
 }
 
 function removeBook(id) {
@@ -98,7 +98,7 @@ function removeBook(id) {
         myLibrary.splice(id, 1);
         localStorage.setItem('library', JSON.stringify(myLibrary));
     }
-    books();
+    renderBooks();
 }
 
 function readStatusChange(id) {
@@ -131,4 +131,4 @@ document.addEventListener("keydown", () => {
     }
 });
 
-books();
+renderBooks();
