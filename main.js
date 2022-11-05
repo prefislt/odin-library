@@ -70,10 +70,6 @@ function addBook() { // Add new book to object
         document.querySelector("#successMsg").innerHTML = "<b>Error!</b> Invalid number of pages!";
         return;
     }
-    if (isNaN(bookYear)) {
-        document.querySelector("#successMsg").innerHTML = "<b>Error!</b> Year number is invalid!";
-        return;
-    }
 
     myLibrary.push(new Book(bookTitle, bookAuthor, bookYear, bookPages, bookIsRead));
 
@@ -83,6 +79,10 @@ function addBook() { // Add new book to object
     document.querySelector("#successMsg").innerHTML = "<b>Success!</b> Book added to the library!";
 
     renderBooks();
+}
+
+function editBook(id) {
+
 }
 
 function clearStorage() {

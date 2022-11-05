@@ -156,7 +156,7 @@ body .popup .popupInside .addToLibrary ul li {
   flex-direction: column;
   color: black;
 }
-body .popup .popupInside .addToLibrary ul li input[type=text] {
+body .popup .popupInside .addToLibrary ul li input {
   border: 0;
   padding: 5px;
   border-radius: 5px;
