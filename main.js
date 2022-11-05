@@ -40,8 +40,8 @@ function renderBooks() { // Render all books on a page
             let isReadIcon;
 
             if (myLibrary[i].isRead == true) {
-                isReadIcon = "READ";
-            } else { isReadIcon = "NOT READ"; }
+                isReadIcon = "🟢";
+            } else { isReadIcon = "🔴"; }
     
             document.querySelector("#library").innerHTML += `
             <div class="book">
@@ -52,9 +52,9 @@ function renderBooks() { // Render all books on a page
                     <p>📄 ${myLibrary[i].pages} pages</p>
                 </div>
                 <div class="options">
-                    <button class="btn delete" onclick=removeBook(${i})>X</button>
+                    <button class="btn delete x" onclick=removeBook(${i})></button>
                     <button class="btn edit" onclick=editBookPopup(${i})>📝</button>
-                    <button class="btn isread" data-readStatusId="${i}" onclick=readStatusChange(${i})>${isReadIcon}</button>
+                    <button class="btn isRead" data-readStatusId="${i}" onclick=readStatusChange(${i})>${isReadIcon}</button>
                 </div>
             </div>
             `;
@@ -174,10 +174,10 @@ function readStatusChange(id) {
 
     if (myLibrary[id].isRead) {
         myLibrary[id].isRead = false;
-        bookStatus.innerHTML = "NOT READ";
+        bookStatus.innerHTML = "🔴";
     } else { 
         myLibrary[id].isRead = true;
-        bookStatus.innerHTML = "READ";
+        bookStatus.innerHTML = "🟢";
     }
     localStorage.setItem('library', JSON.stringify(myLibrary));
 }

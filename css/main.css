@@ -73,6 +73,7 @@ body .popup {
   transition: 0.5s ease-in-out;
   transform: scale(0);
   opacity: 0;
+  z-index: 10;
 }
 body .popup .popupInside {
   display: flex;
@@ -215,23 +216,51 @@ body main .library .book .options {
   flex-direction: row;
   justify-content: space-around;
   height: 50px;
+  overflow-y: hidden;
+  z-index: 0;
 }
 body main .library .book .options .btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   color: black;
   border: none;
-  transition: 0.2s ease-in-out;
+  transition: 0.1s ease-in-out;
   cursor: pointer;
+}
+body main .library .book .options .btn.x::before, body main .library .book .options .btn.x::after {
+  position: absolute;
+  content: "";
+  width: 20px;
+  height: 20px;
+  background-color: white;
+}
+body main .library .book .options .btn.x::before {
+  width: 5px;
+  transform: rotate(45deg);
+}
+body main .library .book .options .btn.x::after {
+  width: 5px;
+  transform: rotate(-45deg);
 }
 body main .library .book .options .btn.delete {
   background-color: rgb(255, 76, 76);
   color: white;
 }
-body main .library .book .options .btn.delete:hover {
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+body main .library .book .options .btn.edit {
+  background-color: rgb(255, 158, 62);
+  font-size: large;
 }
 body main .library .book .options .btn.isRead {
-  font-weight: 500;
+  font-size: large;
+  background-color: rgb(222, 222, 222);
+}
+body main .library .book .options .btn:active {
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+}
+body main .library .book .options .btn:hover {
+  transform: scale(1.1);
 }
 body main .library .book .title {
   font-weight: 600;
