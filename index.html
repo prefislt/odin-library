@@ -10,20 +10,21 @@
 </head>
 <body>
     <script>0</script> <!-- Prevent window popup on first load -->
-    <div class="popup">
+    <div class="popup" data-id>
         <div class="popupInside">
             <div class="top">
-                <span>Add book to library</span>
+                <span id="popupTitle"></span>
                 <button id="closePopup">X</button>
             </div>
             <div class="addToLibrary">
                 <ul>
                     <li><span>Title</span><input type="text" id="bookTitle"/></li>
                     <li><span>Author</span><input type="text" id="bookAuthor"/></li>
+                    <li><span>Year</span><input type="date" id="bookYear"/></li>
                     <li><span>Pages</span><input type="text" id="bookPages"/></li>
                     <li><span>You read it?</span><input type="checkbox" id="bookIsRead"/></li>
                 </ul>
-                <p><button id="submitBook" onclick="addBook()">Submit book</button></p>
+                <p><button id="popupSubmit"></button></p>
                 <p id="successMsg"></p></br>
             </div>
         </div>
@@ -31,7 +32,7 @@
     <nav>
         <div class="logo">My library</div>
         <div class="navOptions">
-            <button id="addBook">
+            <button id="addBook" onclick="addBookPopup()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z"/></svg>
             </button>
             <button id="clearStorage" onclick="clearStorage()">Remove all</button>

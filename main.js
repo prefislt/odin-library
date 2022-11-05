@@ -7,7 +7,28 @@ if (localStorage.getItem('library') === null) {
     myLibrary = JSON.parse(localStorage.getItem('library'));
 }
 
-function books() { // Show all books on a page
+class Book {
+    constructor(title, author, year, pages, isRead) {
+        this.title = title;
+        this.author = author;
+        this.year = year;
+        this.pages = pages;
+        this.isRead = isRead;
+    }
+}
+
+function clearPopupSubmit() {
+    document.querySelector("#popupSubmit").removeEventListener("click", editBook);
+    document.querySelector("#popupSubmit").removeEventListener("click", addBook);
+}
+
+function removePopup() {
+    document.querySelector(".popup").classList.remove("unhide");
+
+    clearPopupSubmit();
+}
+
+function renderBooks() { // Render all books on a page
     myLibrary = JSON.parse(localStorage.getItem('library'));
 
     document.querySelector("#library").innerHTML = "";
@@ -19,20 +40,21 @@ function books() { // Show all books on a page
             let isReadIcon;
 
             if (myLibrary[i].isRead == true) {
-                isReadIcon = "READ";
-            } else { isReadIcon = "NOT READ"; }
+                isReadIcon = "🟢";
+            } else { isReadIcon = "🔴"; }
     
             document.querySelector("#library").innerHTML += `
             <div class="book">
                 <div class="info">
-                    <p class="title">📖 ${myLibrary[i].title}</p>
-                    <p class="author">👤 ${myLibrary[i].author}</p>
-                    <p class="pages">📄 ${myLibrary[i].pages} pages</p>
-                    
+                    <p>📖 ${myLibrary[i].title}</p>
+                    <p>👤 ${myLibrary[i].author}</p>
+                    <p>📅 ${myLibrary[i].year}<p>
+                    <p>📄 ${myLibrary[i].pages} pages</p>
                 </div>
                 <div class="options">
-                    <button class="deleteBtn" onclick=removeBook(${i})>X</button>
-                    <button class="isRead" data-readStatusId="${i}" onclick=readStatusChange(${i})>${isReadIcon}</button>
+                    <button class="btn delete x" onclick=removeBook(${i})></button>
+                    <button class="btn edit" onclick=editBookPopup(${i})>📝</button>
+                    <button class="btn isRead" data-readStatusId="${i}" onclick=readStatusChange(${i})>${isReadIcon}</button>
                 </div>
             </div>
             `;
@@ -44,45 +66,90 @@ function books() { // Show all books on a page
     }
 }
 
+function addBookPopup() {
+    document.querySelector("#popupTitle").innerHTML = "Add book to library";
+    document.querySelector("#popupSubmit").innerHTML = "Submit book";
+    document.querySelector(".popup").classList.add("unhide");
+    document.querySelector("#successMsg").innerHTML = "";
+
+    clearPopupSubmit();
+
+    document.querySelector("#popupSubmit").addEventListener("click", addBook);
+}
+
 function addBook() { // Add new book to object
 
     let bookTitle = document.querySelector("#bookTitle").value;
     let bookAuthor = document.querySelector("#bookAuthor").value;
+    let bookYear = document.querySelector("#bookYear").value;
     let bookPages = document.querySelector("#bookPages").value;
     let bookIsRead = document.querySelector("#bookIsRead").checked;
 
-    if (bookTitle == "" || bookAuthor === ""|| bookPages === "") {
+    if (bookTitle === "" || bookAuthor === "" || bookPages === "" || bookYear === "") {
         document.querySelector("#successMsg").innerHTML = "<b>Error!</b> Missing information!";
         return;
-    } else if (isNaN(bookPages) || bookPages < 1) {
+    }
+    if (isNaN(bookPages) || bookPages < 1) {
         document.querySelector("#successMsg").innerHTML = "<b>Error!</b> Invalid number of pages!";
         return;
-    } else {
-        document.querySelector("#successMsg").innerHTML = "<b>Success!</b> Book added!";
     }
 
-    let librarySize = Object.keys(myLibrary).length;
-
-    let size;
-
-    if (librarySize == 0) {
-        size = librarySize;
-    } else {
-        size = librarySize++;
-    }
-
-    myLibrary.push({
-        id: size,
-        title: bookTitle,
-        author: bookAuthor,
-        pages: bookPages,
-        isRead: bookIsRead
-    });
+    myLibrary.push(new Book(bookTitle, bookAuthor, bookYear, bookPages, bookIsRead));
 
     localStorage.removeItem('library');
     localStorage.setItem('library', JSON.stringify(myLibrary));
 
-    books();
+    document.querySelector("#successMsg").innerHTML = "<b>Success!</b> Book added to the library!";
+
+    renderBooks();
+}
+
+function editBookPopup(id) {
+    document.querySelector(".popup").classList.add("unhide");
+    document.querySelector("#successMsg").innerHTML = "";
+
+    document.querySelector("#popupTitle").innerHTML = "Edit book";
+    document.querySelector("#popupSubmit").innerHTML = "Submit edit";
+
+    document.querySelector("#bookTitle").value = myLibrary[id].title;
+    document.querySelector("#bookAuthor").value = myLibrary[id].author;
+    document.querySelector("#bookYear").value = myLibrary[id].year;
+    document.querySelector("#bookPages").value = myLibrary[id].pages;
+    document.querySelector("#bookIsRead").checked = myLibrary[id].isRead;
+
+    document.querySelector(".popup").setAttribute("data-id", `${id}`);
+
+    clearPopupSubmit();
+
+    document.querySelector("#popupSubmit").addEventListener("click", editBook)
+}
+
+function editBook() {
+    let bookTitle = document.querySelector("#bookTitle").value;
+    let bookAuthor = document.querySelector("#bookAuthor").value;
+    let bookYear = document.querySelector("#bookYear").value;
+    let bookPages = document.querySelector("#bookPages").value;
+    let bookIsRead = document.querySelector("#bookIsRead").checked;
+
+    const id = document.querySelector(".popup").dataset.id;
+
+    if (bookTitle === "" || bookAuthor === "" || bookPages === "" || bookYear === "") {
+        document.querySelector("#successMsg").innerHTML = "<b>Error!</b> Missing information!";
+        return;
+    }
+    if (isNaN(bookPages) || bookPages < 1) {
+        document.querySelector("#successMsg").innerHTML = "<b>Error!</b> Invalid number of pages!";
+        return;
+    }
+
+    myLibrary[id] = new Book(bookTitle, bookAuthor, bookYear, bookPages, bookIsRead);
+
+    localStorage.removeItem('library');
+    localStorage.setItem('library', JSON.stringify(myLibrary));
+
+    document.querySelector("#successMsg").innerHTML = "<b>Success!</b> Book successfully edited!";
+
+    renderBooks();
 }
 
 function clearStorage() {
@@ -90,7 +157,7 @@ function clearStorage() {
     myLibrary = [];
     myLibrary = localStorage.setItem('library', JSON.stringify(myLibrary));
     }
-    books();
+    renderBooks();
 }
 
 function removeBook(id) {
@@ -98,7 +165,7 @@ function removeBook(id) {
         myLibrary.splice(id, 1);
         localStorage.setItem('library', JSON.stringify(myLibrary));
     }
-    books();
+    renderBooks();
 }
 
 function readStatusChange(id) {
@@ -107,28 +174,20 @@ function readStatusChange(id) {
 
     if (myLibrary[id].isRead) {
         myLibrary[id].isRead = false;
-        bookStatus.innerHTML = "NOT READ";
+        bookStatus.innerHTML = "🔴";
     } else { 
         myLibrary[id].isRead = true;
-        bookStatus.innerHTML = "READ";
+        bookStatus.innerHTML = "🟢";
     }
     localStorage.setItem('library', JSON.stringify(myLibrary));
 }
 
-document.querySelector("#addBook").addEventListener("click", () => {
-        document.querySelector(".popup").classList.add("unhide");
-        document.querySelector("#successMsg").innerHTML = "";
-});
-
-document.querySelector("#closePopup").addEventListener("click", () => {
-
-        document.querySelector(".popup").classList.remove("unhide");
-});
+document.querySelector("#closePopup").addEventListener("click", removePopup);
 
 document.addEventListener("keydown", () => {
     if (event.key === 'Escape') {
-        document.querySelector(".popup").classList.remove("unhide");
+        removePopup();
     }
 });
 
-books();
+renderBooks();
